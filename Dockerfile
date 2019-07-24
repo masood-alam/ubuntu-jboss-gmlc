@@ -38,9 +38,13 @@ apt-get update
 
 RUN apt-get install -y openjdk-7-jdk
 
+RUN apt-get install -y unzip
 
 #ADD gmlc-2.1.0-146-multi.tar.gz /opt
-ADD gmlc-2.1.0-146-json.tar.gz /opt
+#ADD gmlc-2.1.0-146-json.tar.gz /opt
+ADD jboss-5.1.0.GA-gmlc.zip /opt
+RUN unzip /opt/jboss-5.1.0.GA-gmlc.zip -d /opt && rm /opt/jboss-5.1.0.GA-gmlc.zip
+ADD data/*.xml /opt/jboss-5.1.0.GA/server/default/data/
 #ADD sctp-api-1.7.0-SNAPSHOT.jar /opt/jboss-5.1.0.GA/server/default/deploy/restcomm-gmlc-server/lib
 #ADD sctp-impl-1.7.0-SNAPSHOT.jar /opt/jboss-5.1.0.GA/server/default/deploy/restcomm-gmlc-server/lib
 CMD ["/opt/jboss-5.1.0.GA/bin/run.sh", "-b", "0.0.0.0"]
